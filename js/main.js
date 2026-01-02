@@ -16,6 +16,7 @@ function initMobileMenu() {
     hamburger.addEventListener("click", () => {
       const isActive = navLinks.classList.toggle("active");
       hamburger.setAttribute("aria-expanded", isActive);
+      document.body.classList.toggle("no-scroll", isActive);
     });
 
     // Close menu when a link is clicked
@@ -23,6 +24,7 @@ function initMobileMenu() {
       link.addEventListener("click", () => {
         navLinks.classList.remove("active");
         hamburger.setAttribute("aria-expanded", "false");
+        document.body.classList.remove("no-scroll");
       });
     });
 
@@ -35,6 +37,7 @@ function initMobileMenu() {
       ) {
         navLinks.classList.remove("active");
         hamburger.setAttribute("aria-expanded", "false");
+        document.body.classList.remove("no-scroll");
       }
     });
   }
