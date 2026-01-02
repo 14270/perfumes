@@ -1385,6 +1385,24 @@ footer {
     /* Ensure stats wrap if needed */
   }
 
+  .product-section {
+    padding: 1.5rem 1rem;
+    /* Reduce padding on mobile */
+  }
+
+  .main-image {
+    width: 100%;
+    aspect-ratio: 1;
+    /* Keep square aspect ratio */
+  }
+
+  .main-image img {
+    object-fit: contain;
+    /* Ensure full image is visible */
+    background: #f5f5f5;
+    /* Maintain background if image doesn't fill */
+  }
+
   .product-card,
   .collection-layout {
     grid-template-columns: 1fr;
@@ -1397,6 +1415,22 @@ footer {
 
   .product-info {
     align-items: center;
+    width: 100%;
+  }
+
+  /* Force Subscription Cards to align left internally, overriding parent center */
+  .sub-option-card {
+    text-align: left;
+    width: 100%;
+  }
+
+  /* Ensure Cart Button is nice and wide */
+  #add-to-cart {
+    width: 100%;
+    max-width: 100%;
+    margin-top: 1.5rem;
+    display: block;
+    text-align: center;
   }
 
   .rating-container {
