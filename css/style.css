@@ -295,6 +295,12 @@ header {
   background: var(--bg-light);
 }
 
+.product-container {
+  width: 100%;
+  overflow-x: auto;
+  -webkit-overflow-scrolling: touch;
+}
+
 .product-card {
   max-width: 1100px;
   margin: 0 auto;
@@ -313,8 +319,9 @@ header {
   position: relative;
   border-radius: 20px;
   overflow: hidden;
-  background: #f5f5f5;
   aspect-ratio: 1;
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.06);
+  transition: all 0.3s ease;
 }
 
 .main-image img {
@@ -382,22 +389,34 @@ header {
   grid-template-columns: repeat(4, 1fr);
   gap: 12px;
   margin-top: 1.5rem;
+  padding: 0.5rem 0;
 }
 
 .thumbnails-grid img {
   width: 100%;
   aspect-ratio: 1;
   object-fit: cover;
-  border-radius: 8px;
+  border-radius: 12px;
   cursor: pointer;
-  opacity: 1;
+  opacity: 0.7;
   border: 2px solid transparent;
-  transition: var(--transition);
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
+}
+
+.thumbnails-grid img:hover {
+  opacity: 1;
+  transform: scale(1.05);
+  box-shadow: 0 4px 16px rgba(0, 0, 0, 0.12);
 }
 
 .thumbnails-grid img.active {
-  border-color: #e91e63;
-  /* Pink border from design */
+  border: 2px solid transparent;
+  background: linear-gradient(#fff, #fff) padding-box,
+    linear-gradient(135deg, #00c853 0%, #016630 100%) border-box;
+  opacity: 1;
+  box-shadow: 0 4px 20px rgba(1, 102, 48, 0.25);
+  transform: scale(1.02);
 }
 
 /* Product Info */
@@ -597,27 +616,33 @@ header {
 }
 
 .fragrance-card-inner {
-  background: #fcfcfc;
-  /* Very light background or white */
-  border: 1px solid #f0f0f0;
-  border-radius: 8px;
-  /* Slightly softer corners */
+  background: #ffffff;
+  border: 1.5px solid #e8e8e8;
+  border-radius: 12px;
   padding: 1.5rem 1rem;
   text-align: center;
-  transition: var(--transition);
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
   height: 100%;
   display: flex;
   flex-direction: column;
   justify-content: flex-start;
   position: relative;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.04);
+}
+
+.fragrance-card:hover .fragrance-card-inner {
+  transform: translateY(-4px);
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.1);
+  border-color: #d0d0d0;
 }
 
 /* Selected State */
-.fragrance-card input[type="radio"]:checked+.fragrance-card-inner {
-  border: 1px solid #e0e0e0;
-  /* Subtle border for selected, or minimal change */
-  background: #fff;
-  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.03);
+.fragrance-card input[type="radio"]:checked + .fragrance-card-inner {
+  border: 2px solid transparent;
+  background: linear-gradient(#fff, #fff) padding-box,
+    linear-gradient(135deg, #00c853 0%, #016630 100%) border-box;
+  box-shadow: 0 6px 20px rgba(1, 102, 48, 0.15);
+  transform: translateY(-2px);
 }
 
 /* Hide default radio */
@@ -642,12 +667,18 @@ header {
 }
 
 /* Selected Radio style */
-.fragrance-card input[type="radio"]:checked+.fragrance-card-inner .custom-radio-small {
+.fragrance-card
+  input[type="radio"]:checked
+  + .fragrance-card-inner
+  .custom-radio-small {
   border-color: #032e15;
   /* Active color */
 }
 
-.fragrance-card input[type="radio"]:checked+.fragrance-card-inner .custom-radio-small::after {
+.fragrance-card
+  input[type="radio"]:checked
+  + .fragrance-card-inner
+  .custom-radio-small::after {
   content: "";
   position: absolute;
   top: 50%;
@@ -678,19 +709,25 @@ header {
   font-weight: 400;
 }
 
-.fragrance-card input[type="radio"]:checked+.fragrance-card-inner .fragrance-name {
+.fragrance-card
+  input[type="radio"]:checked
+  + .fragrance-card-inner
+  .fragrance-name {
   color: #032e15;
   font-weight: 500;
 }
 
 .fragrance-card-inner img {
   height: 100px;
-  /* Adjust height given the card size */
   object-fit: contain;
   margin-top: 2rem;
-  /* Space for the header */
   margin-bottom: 0.5rem;
   width: 100%;
+  transition: transform 0.3s ease;
+}
+
+.fragrance-card:hover .fragrance-card-inner img {
+  transform: scale(1.05);
 }
 
 /* Best Seller Badge - Pill style, Top Right overlapping or near title */
@@ -700,7 +737,7 @@ header {
   right: 10px;
   /* Or left depending on design, design shows it near "Original" text which is left */
   /* Actually design shows it overlapping the top border or just above text */
-  left: 50px;
+  left: auto;
   /* Adjust to be next to "Original" text if desired, or just top right */
   background: #003d1b;
   color: #fff;
@@ -731,15 +768,22 @@ header {
 }
 
 .included-box {
-  border: 1px solid #e0e0e0;
-  border-radius: 8px;
-  padding: 1rem;
+  border: 1.5px solid #e8e8e8;
+  border-radius: 12px;
+  padding: 1.25rem;
   display: flex;
   flex-direction: column;
   justify-content: flex-start;
   height: 100%;
-  background: #fff;
+  background: #ffffff;
   position: relative;
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.04);
+  transition: all 0.3s ease;
+}
+
+.included-box:hover {
+  box-shadow: 0 4px 16px rgba(0, 0, 0, 0.08);
+  transform: translateY(-2px);
 }
 
 .included-type {
@@ -1386,64 +1430,113 @@ footer {
   }
 
   .product-section {
-    padding: 1.5rem 1rem;
-    /* Reduce padding on mobile */
+    padding: 2rem 0;
+    background: var(--bg-light);
   }
 
   .main-image {
     width: 100%;
     aspect-ratio: 1;
-    /* Keep square aspect ratio */
+    border-radius: 16px;
+    margin: 0 1rem;
+    max-width: calc(100% - 2rem);
   }
 
   .main-image img {
-    object-fit: contain;
-    /* Ensure full image is visible */
-    background: #f5f5f5;
-    /* Maintain background if image doesn't fill */
+    object-fit: cover;
   }
 
-  .product-card,
+  .product-card {
+    grid-template-columns: 1fr;
+    gap: 2rem;
+    width: 100%;
+    max-width: 100%;
+    min-width: 1100px;
+    overflow-x: visible;
+    padding: 0;
+  }
+
   .collection-layout {
     grid-template-columns: 1fr;
     gap: 2rem;
     text-align: center;
-    width: 100%;
-    max-width: 100%;
-    overflow-x: hidden;
   }
 
   .product-info {
-    align-items: center;
+    align-items: flex-start;
     width: 100%;
+    padding: 0 1rem;
+    text-align: left;
   }
 
-  /* Force Subscription Cards to align left internally, overriding parent center */
+  .product-header-main {
+    width: 100%;
+    text-align: left;
+  }
+
+  .product-header-main h2 {
+    font-size: 2rem;
+    margin-bottom: 0.75rem;
+  }
+
+  .description {
+    text-align: left;
+    font-size: 1rem;
+    line-height: 1.6;
+  }
+
+  /* Subscription Cards - Mobile Optimized */
+  .subscription-container {
+    width: 100%;
+    margin-bottom: 1.5rem;
+  }
+
   .sub-option-card {
     text-align: left;
     width: 100%;
+    margin-bottom: 1rem;
+    border-radius: 16px;
+    overflow: hidden;
+  }
+
+  .sub-card-content {
+    padding: 1.25rem 1rem;
+  }
+
+  .sub-name {
+    font-size: 1.25rem;
+  }
+
+  .current-price {
+    font-size: 1.5rem;
+  }
+
+  .original-price {
+    font-size: 1.1rem;
   }
 
   /* Ensure Cart Button is nice and wide */
   #add-to-cart {
-    width: 100%;
-    max-width: 100%;
-    margin-top: 1.5rem;
+    width: calc(100% - 2rem);
+    max-width: calc(100% - 2rem);
+    margin: 1.5rem 1rem;
     display: block;
     text-align: center;
   }
 
   .rating-container {
-    justify-content: center;
+    justify-content: flex-start;
+    margin-bottom: 1rem;
   }
 
   .fragrance-header {
-    justify-content: center;
-    left: 0;
+    justify-content: flex-start;
+    left: 10px;
   }
 
   .benefits-list.modern li {
-    justify-content: center;
+    justify-content: flex-start;
+    text-align: left;
   }
 
   .included-grid {
@@ -1481,14 +1574,251 @@ footer {
     width: 100%;
     max-width: 400px;
   }
+
+  /* ========================================
+     MOBILE PRODUCT GALLERY - PREMIUM UI
+     ======================================== */
+
+  /* Gallery Container - Mobile Optimized */
+  .gallery-container {
+    padding: 0;
+    margin: 0;
+    background: transparent;
+    box-shadow: none;
+    width: 100%;
+  }
+
+  .main-image {
+    border-radius: 16px;
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.08);
+    margin: 0 1rem 1rem 1rem;
+    max-width: calc(100% - 2rem);
+  }
+
+  /* Premium Horizontal Thumbnail Scroll */
+  .thumbnails-grid {
+    display: flex;
+    overflow-x: auto;
+    scroll-behavior: smooth;
+    -webkit-overflow-scrolling: touch;
+    scroll-snap-type: x mandatory;
+    gap: 10px;
+    padding: 0.75rem 1rem;
+    margin: 0;
+    width: 100%;
+  }
+
+  /* Styled scrollbar for better UX */
+  .thumbnails-grid::-webkit-scrollbar {
+    height: 4px;
+  }
+
+  .thumbnails-grid::-webkit-scrollbar-track {
+    background: rgba(0, 0, 0, 0.05);
+    border-radius: 10px;
+    margin: 0 1rem;
+  }
+
+  .thumbnails-grid::-webkit-scrollbar-thumb {
+    background: linear-gradient(90deg, #00c853 0%, #016630 100%);
+    border-radius: 10px;
+  }
+
+  .thumbnails-grid::-webkit-scrollbar-thumb:hover {
+    background: linear-gradient(90deg, #016630 0%, #00c853 100%);
+  }
+
+  .thumbnails-grid img {
+    width: 80px;
+    height: 80px;
+    min-width: 80px;
+    flex: 0 0 auto;
+    scroll-snap-align: start;
+    border-radius: 12px;
+    opacity: 0.65;
+    border: 2px solid transparent;
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.08);
+    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    cursor: pointer;
+  }
+
+  .thumbnails-grid img:hover {
+    opacity: 0.85;
+  }
+
+  .thumbnails-grid img.active {
+    opacity: 1;
+    border: 2px solid transparent;
+    background: linear-gradient(#fff, #fff) padding-box,
+      linear-gradient(135deg, #00c853 0%, #016630 100%) border-box;
+    box-shadow: 0 4px 20px rgba(1, 102, 48, 0.35);
+    transform: scale(1.08);
+  }
+
+  /* ========================================
+     MOBILE FRAGRANCE CARDS - PREMIUM UI
+     ======================================== */
+
+  /* Premium Horizontal Fragrance Scroll */
+  .fragrance-grid {
+    display: flex;
+    overflow-x: auto;
+    scroll-snap-type: x mandatory;
+    gap: 10px;
+    padding: 0.75rem 0;
+    margin-bottom: 1.5rem;
+    margin-left: 0;
+    margin-right: 0;
+    -webkit-overflow-scrolling: touch;
+    scroll-behavior: smooth;
+    width: 100%;
+  }
+
+  /* Custom Scrollbar for Fragrance Grid */
+  .fragrance-grid::-webkit-scrollbar {
+    height: 4px;
+  }
+
+  .fragrance-grid::-webkit-scrollbar-track {
+    background: rgba(0, 0, 0, 0.05);
+    border-radius: 10px;
+    margin: 0 1rem;
+  }
+
+  .fragrance-grid::-webkit-scrollbar-thumb {
+    background: linear-gradient(90deg, #00c853 0%, #016630 100%);
+    border-radius: 10px;
+  }
+
+  .fragrance-grid::-webkit-scrollbar-thumb:hover {
+    background: linear-gradient(90deg, #016630 0%, #00c853 100%);
+  }
+
+  .fragrance-card {
+    flex: 0 0 140px;
+    min-width: 140px;
+    scroll-snap-align: start;
+  }
+
+  .fragrance-card-inner {
+    padding: 1.25rem 0.75rem;
+    padding-top: 2rem;
+    min-height: 185px;
+    border-radius: 12px;
+    border: 1.5px solid #e8e8e8;
+    box-shadow: 0 2px 12px rgba(0, 0, 0, 0.06);
+    background: #ffffff;
+    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  }
+
+  .fragrance-card input[type="radio"]:checked + .fragrance-card-inner {
+    border: 2px solid transparent;
+    background: linear-gradient(#fff, #fff) padding-box,
+      linear-gradient(135deg, #00c853 0%, #016630 100%) border-box;
+    box-shadow: 0 4px 20px rgba(1, 102, 48, 0.25);
+    transform: translateY(-2px);
+  }
+
+  .fragrance-card-inner img {
+    height: 80px;
+    margin-top: 1rem;
+  }
+
+  /* Best Seller Badge - Mobile Optimized */
+  .best-seller-badge {
+    left: auto;
+    right: 0;
+    top: 0;
+    width: auto;
+    border-radius: 0 10px 0 10px;
+    padding: 3px 7px;
+    font-size: 0.55rem;
+    position: absolute;
+    background: linear-gradient(135deg, #003d1b 0%, #016630 100%);
+    box-shadow: 0 2px 6px rgba(0, 0, 0, 0.15);
+  }
+
+  /* What's Included - Mobile Optimized */
+  .included-grid {
+    grid-template-columns: 1fr;
+    gap: 0.75rem;
+    margin-bottom: 1.5rem;
+  }
+
+  .included-box {
+    padding: 1.25rem;
+    border-radius: 12px;
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.06);
+    background: #ffffff;
+  }
+
+  .included-type {
+    font-size: 0.85rem;
+    margin-bottom: 0.75rem;
+  }
+
+  .included-image img {
+    height: 110px;
+  }
+
+  .included-image.multi img {
+    height: 70px;
+  }
+
+  /* Add to Cart Button - Mobile Optimized */
+  .full-width-cart,
+  #add-to-cart {
+    margin: 1.5rem 1rem;
+    max-width: calc(100% - 2rem);
+    width: calc(100% - 2rem);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 1.1rem 2rem;
+    font-size: 1.05rem;
+    font-weight: 700;
+    border-radius: 50px;
+    box-shadow: 0 6px 20px rgba(1, 102, 48, 0.3);
+    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    background: linear-gradient(90deg, #016630 0%, #032e15 100%);
+    color: #fff;
+    text-decoration: none;
+  }
+
+  .full-width-cart:active,
+  #add-to-cart:active {
+    transform: scale(0.97);
+    box-shadow: 0 3px 12px rgba(1, 102, 48, 0.25);
+  }
+
+  .full-width-cart:hover,
+  #add-to-cart:hover {
+    box-shadow: 0 8px 25px rgba(1, 102, 48, 0.35);
+    transform: translateY(-1px);
+  }
 }
 
 /* END MOBILE_NAVIGATION */
 
 @media (max-width: 480px) {
+  /* Critical: Prevent horizontal overflow */
+  html,
+  body {
+    overflow-x: hidden;
+    width: 100%;
+    max-width: 100vw;
+  }
+
+  body {
+    position: relative;
+  }
+
   .hero-section {
     padding-top: 90px;
     min-height: 80vh;
+    width: 100%;
+    max-width: 100vw;
+    overflow-x: hidden;
   }
 
   .hero-content h1 {
@@ -1520,6 +1850,349 @@ footer {
   .hero-btn {
     width: 100%;
     max-width: 280px;
+  }
+
+  /* ========================================
+     MOBILE 460px - PRODUCT GALLERY FIXES
+     ======================================== */
+
+  /* Product Section - Remove extra padding */
+  .product-section {
+    padding: 1.5rem 0;
+    width: 100%;
+    max-width: 100vw;
+    overflow-x: hidden;
+  }
+
+  /* Product Card - Ensure no overflow */
+  .product-card {
+    width: 100%;
+    max-width: 100%;
+    min-width: 1100px;
+    overflow-x: visible;
+  }
+
+  /* Gallery Container - Optimize spacing */
+  .gallery-container {
+    padding: 0;
+    margin: 0;
+    width: 100%;
+    gap: 0.75rem;
+  }
+
+  /* Main Image - Better mobile sizing */
+  .main-image {
+    margin: 0 0.75rem 0.75rem 0.75rem;
+    max-width: calc(100% - 1.5rem);
+    border-radius: 12px;
+    box-shadow: 0 3px 15px rgba(0, 0, 0, 0.1);
+  }
+
+  /* Navigation Buttons - Better positioning for small screens */
+  .nav-btn {
+    width: 32px;
+    height: 32px;
+    font-size: 0.9rem;
+    bottom: 15px;
+  }
+
+  .prev {
+    left: 15px;
+  }
+
+  .next {
+    right: 15px;
+  }
+
+  /* Gallery Dots - Smaller for mobile */
+  .gallery-dots .dot {
+    width: 5px;
+    height: 5px;
+  }
+
+  /* Thumbnail Grid - Optimized scroll */
+  .thumbnails-grid {
+    padding: 0.5rem 0.75rem;
+    gap: 8px;
+  }
+
+  .thumbnails-grid img {
+    width: 70px;
+    height: 70px;
+    min-width: 70px;
+    border-radius: 10px;
+  }
+
+  /* ========================================
+     MOBILE 460px - GTG PERFUMES CONTENT
+     ======================================== */
+
+  /* Product Info - Better spacing */
+  .product-info {
+    padding: 0 0.75rem;
+    width: 100%;
+    max-width: 100%;
+    box-sizing: border-box;
+    overflow-x: hidden;
+  }
+
+  /* Product Header */
+  .product-header-main h2 {
+    font-size: 1.75rem;
+    margin-bottom: 0.5rem;
+  }
+
+  /* Rating Container */
+  .rating-container {
+    font-size: 0.85rem;
+    margin-bottom: 1rem;
+  }
+
+  /* Description */
+  .description {
+    font-size: 0.95rem;
+    margin-bottom: 1.5rem;
+    line-height: 1.5;
+  }
+
+  /* Subscription Container */
+  .subscription-container {
+    gap: 1rem;
+    margin-bottom: 1.5rem;
+    width: 100%;
+    max-width: 100%;
+    overflow-x: hidden;
+  }
+
+  /* Subscription Cards */
+  .sub-option-card {
+    border-radius: 12px;
+    margin-bottom: 0.75rem;
+    width: 100%;
+    max-width: 100%;
+    box-sizing: border-box;
+  }
+
+  .sub-card-content {
+    padding: 1rem 0.85rem;
+    width: 100%;
+    box-sizing: border-box;
+  }
+
+  /* Most Popular Banner */
+  .most-popular-banner {
+    padding: 8px;
+    font-size: 0.9rem;
+    width: 100%;
+  }
+
+  /* Subscription Header */
+  .sub-option-header {
+    flex-wrap: wrap;
+    gap: 0.5rem;
+  }
+
+  .sub-name {
+    font-size: 1.1rem;
+  }
+
+  .current-price {
+    font-size: 1.35rem;
+  }
+
+  .original-price {
+    font-size: 1rem;
+  }
+
+  /* Separator Line */
+  .separator-line {
+    margin: 1rem 0;
+  }
+
+  /* Selector Title */
+  .selector-title {
+    font-size: 1rem;
+    margin-bottom: 1rem;
+    width: 100%;
+  }
+
+  /* Sub Details - Prevent overflow */
+  .sub-details {
+    width: 100%;
+    max-width: 100%;
+    overflow-x: hidden;
+    box-sizing: border-box;
+  }
+
+  /* ========================================
+     MOBILE 460px - FRAGRANCE CARDS
+     ======================================== */
+
+  /* Fragrance Grid - Better scroll */
+  .fragrance-grid {
+    gap: 8px;
+    padding: 0.5rem 0;
+    margin-bottom: 1rem;
+    width: 100%;
+    max-width: 100%;
+    overflow-x: auto;
+    overflow-y: hidden;
+    -webkit-overflow-scrolling: touch;
+    scroll-behavior: smooth;
+  }
+
+  .fragrance-card {
+    flex: 0 0 130px;
+    min-width: 130px;
+  }
+
+  .fragrance-card-inner {
+    padding: 1rem 0.65rem;
+    padding-top: 1.75rem;
+    min-height: 170px;
+    border-radius: 10px;
+  }
+
+  .fragrance-card-inner img {
+    height: 70px;
+    margin-top: 0.75rem;
+  }
+
+  .fragrance-name {
+    font-size: 0.85rem;
+  }
+
+  /* Best Seller Badge */
+  .best-seller-badge {
+    font-size: 0.5rem;
+    padding: 2px 5px;
+    border-radius: 0 8px 0 8px;
+  }
+
+  /* What's Included Section */
+  .whats-included-section {
+    margin-top: 1.5rem;
+    width: 100%;
+    max-width: 100%;
+    overflow-x: hidden;
+  }
+
+  .included-grid {
+    gap: 0.65rem;
+    margin-bottom: 1.25rem;
+    width: 100%;
+    max-width: 100%;
+  }
+
+  .included-box {
+    padding: 1rem;
+    border-radius: 10px;
+  }
+
+  .included-type {
+    font-size: 0.8rem;
+    margin-bottom: 0.65rem;
+  }
+
+  .included-image img {
+    height: 100px;
+  }
+
+  .included-image.multi img {
+    height: 65px;
+  }
+
+  /* Benefits List */
+  .benefits-list.modern {
+    width: 100%;
+    max-width: 100%;
+    padding: 0;
+    margin: 0;
+    list-style: none;
+  }
+
+  .benefits-list.modern li {
+    font-size: 0.88rem;
+    margin-bottom: 0.7rem;
+    width: 100%;
+    word-wrap: break-word;
+  }
+
+  .icon-check {
+    font-size: 0.6rem;
+    width: 13px;
+    height: 13px;
+  }
+
+  /* ========================================
+     MOBILE 460px - ADD TO CART BUTTON
+     ======================================== */
+
+  /* Add to Cart Button - Proper positioning */
+  .full-width-cart,
+  #add-to-cart {
+    margin: 1.25rem 0.75rem;
+    max-width: calc(100% - 1.5rem);
+    width: calc(100% - 1.5rem);
+    padding: 1rem 1.5rem;
+    font-size: 1rem;
+    font-weight: 700;
+    border-radius: 50px;
+    box-shadow: 0 5px 18px rgba(1, 102, 48, 0.28);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    box-sizing: border-box;
+    /* Ensure button is easily tappable */
+    min-height: 48px;
+    cursor: pointer;
+  }
+
+  .full-width-cart:active,
+  #add-to-cart:active {
+    transform: scale(0.98);
+    box-shadow: 0 3px 10px rgba(1, 102, 48, 0.22);
+  }
+
+  /* Ensure no content overlap */
+  .product-info {
+    padding-bottom: 1rem;
+  }
+
+  /* Stats Bar - Mobile optimization */
+  .stats-bar {
+    padding: 2rem 1rem;
+    gap: 1.5rem;
+  }
+
+  .stats-bar .percentage {
+    font-size: 2rem;
+  }
+
+  /* Collection Section */
+  .collection-section {
+    padding: 2rem 1rem;
+  }
+
+  .accordion-container h3 {
+    font-size: 2rem;
+    margin-bottom: 1.5rem;
+  }
+
+  .accordion-header {
+    padding: 1.25rem;
+    font-size: 1.1rem;
+  }
+
+  /* Comparison Section */
+  .comparison-section {
+    padding: 2rem 1rem;
+  }
+
+  .comparison-section h2 {
+    font-size: 2rem;
+    margin-bottom: 2.5rem;
   }
 }
 
