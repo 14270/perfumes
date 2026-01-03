@@ -1604,6 +1604,13 @@ footer {
     flex-direction: column;
     width: 100%;
     max-width: 400px;
+    gap: 0.5rem;
+  }
+
+  .newsletter-form button {
+    padding: 12px 24px;
+    width: 100%;
+    font-weight: 700;
   }
 
   /* ========================================
