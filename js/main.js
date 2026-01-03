@@ -222,7 +222,7 @@ function initPurchaseOptions() {
       addToCartBtn.setAttribute("data-type", state.type);
       addToCartBtn.setAttribute("data-fragrances", fragranceInfo);
       addToCartBtn.setAttribute("data-price", state.price);
-      addToCartBtn.textContent = `Add to Cart - $${state.price.toFixed(2)}`;
+      addToCartBtn.innerHTML = `Add to Cart - <span class="cart-price">$${state.price.toFixed(2)}</span>`;
     }
   }
 
